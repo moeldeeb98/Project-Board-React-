@@ -1,24 +1,28 @@
-import logo from './logo.svg';
+import {BrowserRouter as Router, Route, Switch} from 'react-router-dom'
 import './App.css';
 
-function App() {
+// import components
+import Navbar from './components/Navbar';
+import ProjectBoard from './components/ProjectBoard';
+import AddProjectTask from './components/projectTask/AddProjectTask';
+import EditProjectTask from './components/projectTask/EditProjectTask';
+
+// import states
+import ProjectTaskState from './context/ProjectTaskContext/ProjectTaskState';
+
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+        <ProjectTaskState >
+        <Navbar />
+        <Switch>
+            <Route exact path="/" component={ProjectBoard} />
+            <Route path="/add-project-task" component={AddProjectTask}/>
+            <Route path="/edit-project-task/:id" component={EditProjectTask} />
+        </Switch>
+
+        </ProjectTaskState>
+    </Router>
   );
 }
 
